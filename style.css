@@ -1,20 +1,10 @@
-:root {
-    --white: #ffffff;
-    --black: #000000;
-    --very-light-pink: #626262;
-    --text-input-field: #f7f7f7;
-    --hospital-green: #83b04c;
-    --sm: 14px;
-    --md: 16px;
-    --lg: 18px;
-  }
   html {
     margin: 0;
     font-family: "Quicksand", sans-serif;
   }
   a {
     text-decoration: none;
-    color: #000000;
+    color: #c7bda7;
   }
   .container-nav {
     width: 85%;
@@ -22,6 +12,29 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    border-radius: 50px;
+    position: relative;
+    background: linear-gradient(75deg, #1c1c1c, #4b9197);
+    z-index: 1;
+  }
+  
+  .container-nav:after {
+    width: 85%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #1c1c1c;
+    border-radius: 50px;
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: inherit;
+    top: 0.5rem;
+    filter: blur(0.4rem);
+    opacity: 0.7;
+    z-index: -1;
   }
   .secciones-nav {
     display: flex;
@@ -29,11 +42,75 @@
   }
   .secciones-nav li {
     padding: 8px;
+
+    position: relative;
+
+    cursor: pointer;
+    outline: none;
+    overflow: hidden;
+    border-radius: 50%;
   }
+  .secciones-nav li:before{
+    --size: 0;
+    content: '';
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: var(--size);
+    height: var(--size);
+    background: radial-gradient(circle closest-side, rgb(112, 112, 112), transparent);
+    transform: translate(-50%, -50%);
+    transition: width 0.2s ease, height 0.2s ease;
+
+  }
+  .secciones-nav li:hover:before{
+    --size: 200px;
+
+  }
+  .logo a img {
+    height: 88px;
+    margin-top: 6px;
+  }
+  .rrss {
+    background-color: white;
+    border-radius: 24px;
+    width: 148px;
+    display: flex;
+    justify-content: center;
+    height: 44px;
+    align-items: center;
+
+    position: relative;
+    background: linear-gradient(75deg,  #4b9197,#ffffff);
+    z-index: 1;
+  }
+  .rrss::after{
+    width: 85%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #1c1c1c;
+    border-radius: 50px;
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: inherit;
+    top: 0.5rem;
+    filter: blur(0.4rem);
+    opacity: 0.7;
+    z-index: -1;
+  }
+
   .rrss img {
-  width: 25px;
+  width: 38px;
   padding: 8px;
   }
+  .rrss img:hover {
+    width: 46px;
+    padding: 8px;
+    }
   .menu-resp {
     align-items: center;
   }
@@ -65,99 +142,110 @@
   @media (min-width:810px) {
     .menu-resp {
       display: none;
+  
     }
 }
 * {box-sizing:border-box}
-
-/* Slideshow container */
-.slideshow-container {
-  max-width: 1000px;
+/* para el inicio */
+.main {
+  margin-top: 32px;
+  display: flex;
+  flex-wrap: wrap;
+    justify-content: center;
+}
+/* para los títulos de proyectos */
+.hover-img {
+  background-color: #000;
+  color: #fff;
+  display: inline-block;
+  margin: 8px;
+  max-width: 320px;
+  min-width: 240px;
+  overflow: hidden;
   position: relative;
-  margin: auto;
-}
-
-/* Hide the images by default */
-.mySlides {
-  display: none;
-}
-
-/* Next & previous buttons */
-.prev, .next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  margin-top: -22px;
-  padding: 16px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
-}
-
-/* Position the "next button" to the right */
-.next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
-
-/* On hover, add a black background color with a little bit see-through */
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
-}
-
-/* Caption text */
-.text {
-  color: #f2f2f2;
-  font-size: 15px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
   text-align: center;
+  width: 100%;
 }
 
-/* Number text (1/3 etc) */
-.numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
+.hover-img * {
+  box-sizing: border-box;
+  transition: all 0.45s ease;
+}
+
+.hover-img:before,
+.hover-img:after {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-top: 32px solid rgba(0, 0, 0, 0.5);
+  border-bottom: 32px solid rgba(0, 0, 0, 0.5);
   position: absolute;
   top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  content: '';
+  transition: all 0.3s ease;
+  z-index: 1;
+  opacity: 0;
+  transform: scaleY(2);
 }
 
-/* The dots/bullets/indicators */
-.dot {
-  cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
+.hover-img img {
+  vertical-align: top;
+  max-width: 100%;
+  backface-visibility: hidden;
 }
 
-.active, .dot:hover {
-  background-color: #717171;
+.hover-img figcaption {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  align-items: center;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1.1em;
+  opacity: 0;
+  z-index: 2;
+  transition-delay: 0.1s;
+  font-size: 24px;
+  font-family: sans-serif;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-/* Fading animation */
-.fade {
-  -webkit-animation-name: fade;
-  -webkit-animation-duration: 1.5s;
-  animation-name: fade;
-  animation-duration: 1.5s;
+.hover-img:hover:before,
+.hover-img:hover:after {
+  transform: scale(1);
+  opacity: 1;
 }
 
-@-webkit-keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
+.hover-img:hover > img {
+  opacity: 0.7;
 }
 
-@keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
+.hover-img:hover figcaption {
+  opacity: 1;
+}
+
+/* para la foto del about */
+.hover-rotate {
+  overflow: hidden;
+  margin: 8px;
+  min-width: 240px;
+  max-width: 320px;
+  width: 100%;
+}
+
+.hover-rotate img {
+  transition: all 0.3s;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.hover-rotate:hover img {
+  transform: scale(1.3) rotate(5deg);
 }
