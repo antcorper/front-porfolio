@@ -4,15 +4,15 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blog</title>
-    <link
-    href="    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <title>Proyecto</title>
+    <link href="
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    " />
 
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div>
     <div class="container-nav">
       <div class="logo">
         <a href="index.html">
@@ -64,16 +64,28 @@
         </a>
       </div>
     </div>
-    <div id="myList"></div>
+    <div class="main">
+      <form id="form">
+        <input type="text" id="busqueda" placeholder="Nombre del proyecto" />
+        <input type="submit" value="Buscar" />
+      </form>
 
-</div>
+      <!-- <div id="lista">
+        <a id="enlace">
+          <figure class="imageurl">
+            <img id="imageurl" />
+            <figcaption>
+              <h3 id="name"></h3>
+            </figcaption>
+          </figure>
+        </a>
+      </div>
+    </div> -->
 
-    </div>
-  </div>
-      <footer>
-        <hr style="color: #c7bda5" />
-        <p>Web desarrollada por Antonio Jesús Cordero Pérez</p>
-      </footer>
-<script src="blog.js"></script>
+    <ul id="lista">
+      <li id="name"></li>
+      <img src="" alt="" id="imageurl">
+    </ul>
+    <script src="proyecto.js"></script>
   </body>
 </html>
