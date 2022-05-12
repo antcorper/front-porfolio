@@ -606,7 +606,7 @@
 
   /* detail_work */
   #imageurlimageurl {
-    height: 279px;
+    height: 350px;
   }
 
   .detail {
@@ -638,4 +638,8 @@
     width: 75%;
     text-align: justify;
     color: white;
+  }
+
+  footer {
+    margin-top: 90px;
   }
