@@ -70,6 +70,70 @@
 
     </div>
   </div>
+
+  import 'ol/ol.css';
+  import {Map, View} from 'ol';
+  import TileLayer from 'ol/layer/Tile';
+  import OSM from 'ol/source/OSM';
+  import {fromLonLat} from 'ol/proj';
+  //importamos los módulos para capas vectoriales
+  import VectorLayer from 'ol/layer/Vector';
+  import VectorSource from 'ol/source/Vector';
+  import GeoJSON from 'ol/format/GeoJSON';
+  import {Fill, Stroke, Circle, Style} from 'ol/style';
+  import Text from 'ol/style/Text';
+  
+  var osm = new TileLayer({
+    source: new OSM()
+  });
+  
+      var condStyle = function(feature) {
+        var smallcities = [new Style({
+          image: new Circle({
+            radius: 2.5,
+            fill: new Fill({color: 'blue'})
+          })
+        })
+        ];
+        var largecities = [new Style({
+          image: new Circle({
+            radius: 3.5,
+            fill: new Fill({color: 'red'})
+          })
+        })
+        ];
+        
+        if (feature.get('pop_max') > 1000000) {
+          return largecities;
+        } else {
+           return smallcities;
+        }
+      };
+  
+      var vector =  new VectorLayer({
+              title: 'cities',
+        declutter: true,
+        style: condStyle,
+              source: new VectorSource({ 
+          format: new GeoJSON(),
+          url: 'http://localhost:8080/geoserver/earth/wfs?' +
+            'service=WFS&' +
+            'version=1.0.0&request=GetFeature&typename=cities&'+
+            'outputFormat=application/json'
+        })
+      });
+  
+  
+  const map = new Map({
+    target: 'map',
+    layers: [osm, vector],
+    view: new View({
+    center:fromLonLat([-4.72, 41.66]),
+      zoom: 0
+    })
+  });
+  
+
       <footer>
         <hr style="color: #c7bda5" />
         <p>Web desarrollada por Antonio Jesús Cordero Pérez</p>
