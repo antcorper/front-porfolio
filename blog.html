@@ -79,39 +79,7 @@
   </div>
 
 
-  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>  
-  <script src="poligono.js"></script> 
-
- <div id ="map"> </div>  
-<script> 
-var map = L.map('map', {center: [36.779, -6.354],zoom: 19}); 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map); 
-
- function style(feature) { 
-   return { 
-     fillColor: 'red', 
-     weight: 2, 
-     opacity: 1, 
-     color: 'white', 
-     dashArray: '3', 
-     fillOpacity: 0.7 
-   }; 
- } 
-  
- function popup(feature, layer) {
-layer.bindPopup(geojson.features[0].properties.title); 
- } 
-
- geojson = L.geoJson (geojson,
- { 
-   style: style, 
-   onEachFeature: popup 
- }).addTo(map); 
-
-
-</script> 
-<canvas>
-<div id ="map"> </div>  
+ 
 
 
 
