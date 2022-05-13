@@ -10,8 +10,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <link rel="stylesheet" href="style.css" />
+    <style>  
+      #map { 
+       width: 700px; 
+       height: 600px; } 
+   </style>  
   </head>
   <body>
+  
+
     <div>
     <div class="container-nav">
       <div class="logo">
@@ -64,76 +71,51 @@
         </a>
       </div>
     </div>
-    <div id="myList"></div>
+
 
 </div>
 
     </div>
   </div>
-<script>
-  import 'ol/ol.css';
-  import {Map, View} from 'ol';
-  import TileLayer from 'ol/layer/Tile';
-  import OSM from 'ol/source/OSM';
-  import {fromLonLat} from 'ol/proj';
-  //importamos los módulos para capas vectoriales
-  import VectorLayer from 'ol/layer/Vector';
-  import VectorSource from 'ol/source/Vector';
-  import GeoJSON from 'ol/format/GeoJSON';
-  import {Fill, Stroke, Circle, Style} from 'ol/style';
-  import Text from 'ol/style/Text';
+
+
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>  
+  <script src="poligono.js"></script> 
+
+ <div id ="map"> </div>  
+<script> 
+var map = L.map('map', {center: [36.779, -6.354],zoom: 19}); 
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map); 
+
+ function style(feature) { 
+   return { 
+     fillColor: 'red', 
+     weight: 2, 
+     opacity: 1, 
+     color: 'white', 
+     dashArray: '3', 
+     fillOpacity: 0.7 
+   }; 
+ } 
   
-  var osm = new TileLayer({
-    source: new OSM()
-  });
-  
-      var condStyle = function(feature) {
-        var smallcities = [new Style({
-          image: new Circle({
-            radius: 2.5,
-            fill: new Fill({color: 'blue'})
-          })
-        })
-        ];
-        var largecities = [new Style({
-          image: new Circle({
-            radius: 3.5,
-            fill: new Fill({color: 'red'})
-          })
-        })
-        ];
-        
-        if (feature.get('pop_max') > 1000000) {
-          return largecities;
-        } else {
-           return smallcities;
-        }
-      };
-  
-      var vector =  new VectorLayer({
-              title: 'cities',
-        declutter: true,
-        style: condStyle,
-              source: new VectorSource({ 
-          format: new GeoJSON(),
-          url: 'http://localhost:8080/geoserver/earth/wfs?' +
-            'service=WFS&' +
-            'version=1.0.0&request=GetFeature&typename=cities&'+
-            'outputFormat=application/json'
-        })
-      });
-  
-  
-  const map = new Map({
-    target: 'map',
-    layers: [osm, vector],
-    view: new View({
-    center:fromLonLat([-4.72, 41.66]),
-      zoom: 0
-    })
-  });
-</script>
-  
+ function popup(feature, layer) {
+layer.bindPopup(geojson.features[0].properties.title); 
+ } 
+
+ geojson = L.geoJson (geojson,
+ { 
+   style: style, 
+   onEachFeature: popup 
+ }).addTo(map); 
+
+
+</script> 
+<canvas>
+<div id ="map"> </div>  
+
+
+
+
 
       <footer>
         <hr style="color: #c7bda5" />
